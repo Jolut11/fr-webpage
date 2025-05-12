@@ -1,15 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const titulo = document.getElementById("titleTxt");
   const preguntaTxt = document.getElementById("questionTxt");
-  const contenedorOpciones = document.getElementById("optionsContainer");
-  const ayudaTxt = document.getElementById("ayudaTxt");
 
   fetch("https://fr-app.onrender.com/get_cuestionary")
     .then(res => res.json())
     .then(data => {
+        preguntaTxt.textContent = "EEEEEEEEERRROR";
         preguntaTxt.textContent = data
     })
     .catch(error => {
+        preguntaTxt.textContent = "EEEEEEEEERRROR";
         preguntaTxt.textContent = error;
         console.error("Error: ", error);
     });
