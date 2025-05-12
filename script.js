@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("https://fr-app.onrender.com/get_cuestionary")
     .then(res => res.json())
     .then(data => {
-        titulo.textContent = "cargando...";
-        //titulo.textContent = data[0].s;
+        titulo.textContent = data
     })
     .catch(error => {
-      console.error("Error al obtener usuario:", error);
+        titulo.textContent = "Error al cargar el cuestionario";
+        console.error("Error al obtener usuario:", error);
     });
 });
 
