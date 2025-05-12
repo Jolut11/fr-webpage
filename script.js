@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("https://fr-app.onrender.com/get_cuestionary")
     .then(res => res.json())
     .then(data => {
+        titulo.textContent = "cargando...";
         titulo.textContent = data[0].s;
     })
     .catch(error => {
