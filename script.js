@@ -10,11 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
         })
     .then(data => {
-        if (data.questions && data.questions.length > 0) {
+        preguntaTxt.textContent = data
+        /*if (data.questions && data.questions.length > 0) {
             preguntaTxt.textContent = data.questions[0].s; // Cambia el texto
         } else {
             preguntaTxt.textContent = "No se encontraron preguntas.";
-        }
+        }*/
     })
     .catch(error => {
         preguntaTxt.textContent = "Error al obtener preguntas: " + error.message;
