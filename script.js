@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(error => {
         preguntaTxt.textContent = error;
-        console.error("Error al obtener usuario:", error);
+        console.error("Error: ", error);
     });
 });
 
