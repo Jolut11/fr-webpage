@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(data => {
         titulo.textContent = "cargando...";
-        titulo.textContent = data[0].s;
+        //titulo.textContent = data[0].s;
     })
     .catch(error => {
       console.error("Error al obtener usuario:", error);
