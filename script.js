@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
         })
     .then(data => {
-        preguntaTxt.textContent = data[0].s; // Cambia el texto
+        const texto = JSON.stringify(data, null, 2);
+        preguntaTxt.textContent = texto; // Cambia el texto
         /*if (data.questions && data.questions.length > 0) {
             preguntaTxt.textContent = data.questions[0].s; // Cambia el texto
         } else {
