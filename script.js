@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         preguntaTxt.textContent = data
     })
     .catch(error => {
-        preguntaTxt.textContent = "Error al cargar el cuestionario";
+        preguntaTxt.textContent = error;
         console.error("Error al obtener usuario:", error);
     });
 });
