@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
             optionDiv.className = "option";
             //crear un p para mostrar el texto de la opción
             const optionText = document.createElement("p");
-            optionText.textContent = opcion.id + " - " + opcion.t;
+            optionText.textContent = JSON.stringify(opcion.id) + " - " + JSON.stringify(opcion.t);
             optionDiv.appendChild(optionText);
             containerOpciones.appendChild(optionDiv);
         }
