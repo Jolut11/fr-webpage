@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const optionDiv = document.createElement("div");
             optionDiv.className = "option-1";
             const optionText = document.createElement("p");
+            optionText.className = "option-1";
             optionText.textContent = JSON.stringify(opcion.id) + " - " + JSON.stringify(opcion.t);
             optionDiv.appendChild(optionText);
             containerOpciones.appendChild(optionDiv);
