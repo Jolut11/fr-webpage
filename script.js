@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         preguntaTxt.textContent = data[0].s;
         ayudaTxt.textContent = data[0].j;
 
-        f//crear un boton con cada una de las opciones
+        //crear un boton con cada una de las opciones
         data[0].o.forEach((opcion, index) => {
             const button = document.createElement("button");
             button.textContent = opcion;
