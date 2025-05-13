@@ -17,13 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
         preguntaTxt.textContent = data[0].s;
         ayudaTxt.textContent = data[0].j;
 
-        //crear un boton con cada una de las opciones
-        data[0].o.forEach((opcion, index) => {
-            const button = document.createElement("button");
-            button.textContent = opcion;
-            button.classList.add("option-button");
-            containerOpciones.appendChild(button);
-        });
+        for (const opcion of data[0].o) {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+            optionDiv.textContent = opcion;
+            containerOpciones.appendChild(optionDiv);
+        }
     })
     .catch(error => {
         preguntaTxt.textContent = "Error al obtener preguntas: " + error.message;
