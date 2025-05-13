@@ -6,7 +6,7 @@ fetch("https://fr-app.onrender.com/get_cuestionary")
         return response.json();
         })
     .then(data => {
-        console.log("Datos obtenidos:", data[0].s);
+        console.log("Datos obtenidos: " + data[0].o.length + "!");
     })
     .catch(error => {
         console.error("Error al obtener preguntas:", error);
