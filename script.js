@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const opcion of data[0].o) {
             const optionDiv = document.createElement("div");
             optionDiv.className = "option";
-            optionDiv.textContent = "" + opcion.id + " - " + opcion.t;
+            optionDiv.textContent = opcion.id + " - " + opcion.t;
             containerOpciones.appendChild(optionDiv);
         }
     })
