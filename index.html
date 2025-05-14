@@ -1,41 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>MediQuest</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="card">
-        <div class="question"  id="0">
-          <div class="title" id="title"><h1 id="titleTxt">Pregunta 1 de 5</h1></div>
-          <div class="question-text" id="questionContainer">
-            <p id="questionTxt">Texto de la pregunta.</p>
-          </div>
-        </div>
-        
-        <div class="options" id="optionsContainer">
-            <!--<div class="btn" id="option-1">Espinal accesorio</div>-->
-        </div>
+<html lang="es">
 
-        </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>MediQuest</title>
+</head>
 
-        <div class="help-container">
-            <ul class="help-acordion">
-                <h1>Ayuda</h1>
-                <li>
-                    <input type="checkbox" id="texto-ayuda">
-                    <label for="texto-ayuda">Respuesta </label>
-                    <div class="content-ayuda" id="ayudaContainer">
-                        <p id="ayudaTxt">Texto de ayuda</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
+<body>
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-card">
+      <h2>Ayuda</h2>
+      <p id="helpTxt">Texto de ayuda</p>
+      <button class="close-button" onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2 style="text-align:center;" id="titleTxt">Titulo</h2>
+    <div class="card">
+      <div class="question">
+        <p style="text-align:center;" id="questionTxt">Texto de la pregunta</p>
       </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+    <div class="optionscontainer">
+      <form id="formOptions">
+        <!--<div class="option">
+                    <label><input type="radio" name="respuesta" value="A" />Opción de respuesta</label>
+                </div>-->
+      </form>
+    </div>
+
+    <div class="buttons-container" id="buttonsContainer">
+      <button class="submit-btn" type="button">Anterior</button>
+      <button class="submit-btn" type="button" onclick="onHelpBtnClic()">Ayuda</button>
+      <button class="submit-btn" type="button">Siguiente</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
