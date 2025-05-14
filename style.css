@@ -24,6 +24,7 @@
 
 .optionscontainer {
   margin-top: 30px;
+  margin-bottom: 60px;
 }
 
 .option {
@@ -85,7 +86,7 @@
   border-radius: 12px;
   max-height: 80vh;
   overflow-y: auto;
-  margin: 20px;
+  margin: 40px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
