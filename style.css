@@ -81,12 +81,13 @@
 
 /* Estilo de la tarjeta modal */
 .modal-card {
-  background: #fff;
-  padding: 30px;
+  box-sizing: border-box;
+  padding: 30px 30px calc(30px + env(safe-area-inset-bottom, 0px));
   border-radius: 12px;
-  max-height: 80vh;
+  max-height: calc(100vh - 40px);
   overflow-y: auto;
   margin: 20px;
+  background: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
