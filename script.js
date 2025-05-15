@@ -4,7 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const formOpciones = document.getElementById("formOptions");
     const ayudaTxt = document.getElementById("helpTxt");
 
-    fetch("https://fr-app.onrender.com/get_cuestionary")
+    const payload = {
+        number_questions: 1
+    };
+
+    fetch("https://fr-app.onrender.com/create_cuestionary", {
+        method: "POST", headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
         .then(response => {
             if (!response.ok) {
                 preguntaTxt.textContent = "Respuesta de red no fue ok";
