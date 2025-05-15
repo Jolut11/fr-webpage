@@ -5,11 +5,12 @@
 
 .content {
   overflow-y: scroll;
+  margin-bottom: 40px;
 }
 
 .card {
   max-width: 800px;
-  min-width: 300px;
+  min-width: 200px;
   margin: auto;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -106,4 +107,37 @@
 
 .close-button:hover {
   background-color: #c0392b;
+}
+
+#spinner-container {
+  pointer-events: none;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#spinner {
+  display: none;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
