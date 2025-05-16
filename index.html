@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8" />
@@ -9,60 +9,39 @@
 </head>
 
 <body>
-  <div class="container">
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-card">
+      <h2>Ayuda</h2>
+      <p id="helpTxt">Texto de ayuda</p>
+      <button class="close-button" onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Cargando -->
+  <div id="spinner-container">
+    <div id="spinner"></div>
+  </div>
+
+  <div class="content" id="content">
+    <h2 style="text-align:center;" id="titleTxt">Titulo</h2>
     <div class="card">
-      <div class="question" id="0">
-        <div class="title">
-          <h1>Pregunta 1 de 5</h1>
-        </div>
-        <div class="question-text" id="0">
-          <p>
-            Masculino de 27 años acude al servicio de urgencias después de un
-            accidente de tránsito en el que sufrió una fractura del borde
-            lateral de la escápula. Seis semanas después del accidente, el
-            examen físico pone de manifiesto debilidad en la rotación medial y
-            la aducción del húmero. ¿Qué nervio se ha lesionado?
-          </p>
-        </div>
-      </div>
-
-      <div class="options">
-        <div class="btn" id="option-1">Espinal accesorio</div>
-        <div class="btn" id="option-2">Axilar</div>
-        <div class="btn" id="option-3">Radial</div>
-        <div class="btn" id="option-4">Subescapular</div>
-      </div>
-
-      </section>
-
-      <div class="help-container">
-        <ul class="help-acordion">
-          <h1>Ayuda</h1>
-          <li>
-            <input type="checkbox" id="texto-ayuda">
-            <label for="texto-ayuda">Respuesta </label>
-            <div class="help-container">
-              <button class="btn-ayuda" id="btn-ayuda">Ver ayuda</button>
-            </div>
-          </li>
-        </ul>
+      <div class="question">
+        <p style="text-align:center;" id="questionTxt">Texto de la pregunta</p>
       </div>
     </div>
-  </div>
-
-  <div id="modal-ayuda" class="modal-ayuda">
-    <div class="modal-ayuda-content">
-      <span class="close-ayuda">&times;</span>
-      <div id="modal-ayuda-text"></div>
+    <div class="optionscontainer">
+      <form id="formOptions">
+        <!--<div class="option">
+                    <label><input type="radio" name="respuesta" value="A" />Opción de respuesta</label>
+                </div>-->
+      </form>
     </div>
-  </div>
 
-  <!-- Modal de resumen de respuestas -->
-  <div id="modal-resumen" class="modal-ayuda">
-    <div class="modal-ayuda-content">
-      <span class="close-ayuda">&times;</span>
-      <h2>Respuestas seleccionadas</h2>
-      <div id="modal-resumen-text"></div>
+    <div class="buttons-container" id="buttonsContainer">
+      <button class="submit-btn" type="button">Anterior</button>
+      <button class="submit-btn" type="button" onclick="onHelpBtnClic()">Ayuda</button>
+      <button class="submit-btn" type="button">Siguiente</button>
     </div>
   </div>
 
