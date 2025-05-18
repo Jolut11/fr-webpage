@@ -82,9 +82,9 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
 
-
-.correcta 
+.correcta {
   background-color: #d1e7dd;
   border: thin solid #a3cfbb;
   color: #0a3622;
