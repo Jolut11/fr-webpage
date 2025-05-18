@@ -1,14 +1,38 @@
 * body {
+  padding: 0;
+  margin: 0;
+  font-weight: 62.5;
   font-family: Arial, sans-serif;
-  padding: 20px;
+  /* padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
 }
 
 .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow-y: scroll;
   margin-bottom: 40px;
 }
 
+.content h2 {
+  text-align: center;
+}
+
 .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 800px;
   min-width: 200px;
   margin: auto;
@@ -16,6 +40,8 @@
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: justify;
+  font-weight: 500;
 }
 
 .question {
@@ -25,22 +51,55 @@
 
 .optionscontainer {
   margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#formOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 55%;
 }
 
 .option {
+  width: 90%;
   margin-bottom: 10px;
   margin-top: 10px;
 }
 
 .option input {
-  margin-right: 10px;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.option label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+
+.correcta 
+  background-color: #d1e7dd;
+  border: thin solid #a3cfbb;
+  color: #0a3622;
+}
+
+.incorrecta {
+  background-color: #f8d7da;
+  /*f1aeb5*/
+  border: thin solid #f1aeb5;
+  color: #58151c;
 }
 
 .buttons-container {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
+  /* position: fixed; */
+  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -131,6 +190,12 @@
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;
+}
+
+@media (max-width: 390px) {
+  #formOptions {
+    width: 100%;
+  }
 }
 
 @keyframes spin {
