@@ -38,6 +38,7 @@ async function loadQuestionary(number_questions) {
         });
 
         if (!response.ok) {
+            alert("Respuesta de red no fue ok");
             throw new Error("Respuesta de red no fue ok");
         }
 
