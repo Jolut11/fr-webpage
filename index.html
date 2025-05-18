@@ -2,6 +2,11 @@
 <html lang="es">
 
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
@@ -23,25 +28,33 @@
     <div id="spinner"></div>
   </div>
 
-  <div class="content" id="content">
-    <h2 style="text-align:center;" id="titleTxt">Titulo</h2>
-    <div class="card">
-      <div class="question">
-        <p style="text-align:center;" id="questionTxt">Texto de la pregunta</p>
+  <div class="container">
+    <div class="content" id="content">
+      <h2 id="titleTxt">Titulo</h2>
+      <div class="card">
+        <div class="question">
+          <p id="questionTxt">Texto de la pregunta</p>
+        </div>
       </div>
-    </div>
-    <div class="optionscontainer">
-      <form id="formOptions">
-        <!--<div class="option">
-                    <label><input type="radio" name="respuesta" value="A" />Opción de respuesta</label>
-                </div>-->
-      </form>
-    </div>
+      <div class="optionscontainer">
+        <form id="formOptions">
+          <!--<div class="option">
+                      <label><input type="radio" name="respuesta" value="A" />Opción de respuesta</label>
+                  </div>-->
+        </form>
+      </div>
 
-    <div class="buttons-container" id="buttonsContainer">
-      <button class="submit-btn" type="button" onclick="onPreviousQuestionBtnClic()">Anterior</button>
-      <button class="submit-btn" type="button" onclick="onHelpBtnClic()">Ayuda</button>
-      <button class="submit-btn" type="button" onclick="onNextQuestionBtnClic()">Siguiente</button>
+      <div class="buttons-container" id="buttonsContainer">
+        <button class="submit-btn" type="button" onclick="onPreviousQuestionBtnClic()">
+          Anterior
+        </button>
+        <button class="submit-btn" type="button" onclick="onHelpBtnClic()">
+          Ayuda
+        </button>
+        <button class="submit-btn" type="button" onclick="onNextQuestionBtnClic()">
+          Siguiente
+        </button>
+      </div>
     </div>
   </div>
 

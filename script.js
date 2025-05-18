@@ -27,15 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadQuestionary(number_questions) {
     try {
         const payload = {
-            number_questions: number_questions
+            number_questions: number_questions,
         };
 
-        const response = await fetch("https://fr-app.onrender.com/create_cuestionary", {
-            method: "POST", headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
+        const response = await fetch(
+            "https://fr-app.onrender.com/create_cuestionary",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            }
+        );
 
         if (!response.ok) {
             alert("Respuesta de red no fue ok");
@@ -51,7 +55,10 @@ async function loadQuestionary(number_questions) {
         renderQuestion(currentQuestionIndex);
     } catch (error) {
         console.error("Error al cargar el cuestionario:", error);
-        alert("Error al cargar el cuestionario. Por favor, inténtalo de nuevo más tarde." + error);
+        alert(
+            "Error al cargar el cuestionario. Por favor, inténtalo de nuevo más tarde." +
+            error
+        );
     }
 }
 
@@ -62,14 +69,15 @@ function renderQuestion(questionIndex) {
 
     formOpciones.innerHTML = "";
 
-    tituloTxt.textContent = "Pregunta " + (1 + questionIndex) + " de " + questionsData.length;
+    tituloTxt.textContent =
+        "Pregunta " + (1 + questionIndex) + " de " + questionsData.length;
     preguntaTxt.textContent = questionsData[questionIndex].s;
     ayudaTxt.textContent = questionsData[questionIndex].j;
 
     const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     questionsData[questionIndex].o.forEach((opcion, index) => {
-        if (JSON.stringify(opcion.t) == "\"\"") {
+        if (JSON.stringify(opcion.t) == '""') {
             return;
         }
 
@@ -94,7 +102,7 @@ function renderQuestion(questionIndex) {
 }
 
 function onHelpBtnClic() {
-    document.getElementById('modal').style.display = 'flex';
+    document.getElementById("modal").style.display = "flex";
 }
 
 function onNextQuestionBtnClic() {
@@ -114,5 +122,5 @@ function onPreviousQuestionBtnClic() {
 }
 
 function cerrarModal() {
-    document.getElementById('modal').style.display = 'none';
+    document.getElementById("modal").style.display = "none";
 }
