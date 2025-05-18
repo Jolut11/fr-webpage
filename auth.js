@@ -3,15 +3,15 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/f
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        if (window.location.pathname.endsWith("/login.html") || window.location.pathname.endsWith("/login")) {
+        if (window.location.pathname.endsWith("login.html") || window.location.pathname.endsWith("login")) {
             // Si el usuario ya está autenticado y está en la página de login, redirige a la página principal
-            window.location.href = "/index.html";
+            window.location.href = "index.html";
         }
     }
     else {
-        if (!window.location.pathname.endsWith("/login.html") && !window.location.pathname.endsWith("/login")) {
+        if (!window.location.pathname.endsWith("login.html") && !window.location.pathname.endsWith("login")) {
             // Si el usuario no está autenticado y no está en la página de login, redirige a login
-            window.location.href = "/login.html";
+            window.location.href = "login.html";
         }
     }
 });
