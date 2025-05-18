@@ -128,3 +128,7 @@ function cerrarModal() {
 }
 
 window.onLogoutBtnClic = onLogoutBtnClic;
+window.onHelpBtnClic = onHelpBtnClic;
+window.onNextQuestionBtnClic = onNextQuestionBtnClic;
+window.onPreviousQuestionBtnClic = onPreviousQuestionBtnClic;
+window.cerrarModal = cerrarModal;
