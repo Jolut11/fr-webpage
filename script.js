@@ -1,13 +1,15 @@
+import { onLogoutBtnClic } from './auth.js';
+
 let questionsData = [];
 let currentQuestionIndex = 0;
 
-spinner = HTMLElement;
-content = HTMLElement;
+let spinner;
+let content;
 
-preguntaTxt = HTMLElement;
-tituloTxt = HTMLElement;
-formOpciones = HTMLElement;
-ayudaTxt = HTMLElement;
+let preguntaTxt;
+let tituloTxt;
+let formOpciones;
+let ayudaTxt;
 
 document.addEventListener("DOMContentLoaded", () => {
     spinner = document.getElementById("spinner");
@@ -124,3 +126,5 @@ function onPreviousQuestionBtnClic() {
 function cerrarModal() {
     document.getElementById("modal").style.display = "none";
 }
+
+window.onLogoutBtnClic = onLogoutBtnClic;

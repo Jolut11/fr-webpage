@@ -1,5 +1,6 @@
 import { auth } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -15,3 +16,15 @@ onAuthStateChanged(auth, (user) => {
         }
     }
 });
+
+export function onLogoutBtnClic() {
+    signOut(auth)
+        .then(() => {
+            // Logout exitoso, redirigir a login
+            //window.location.href = "/fr-webpage/login.html"; // ajusta esta ruta si hace falta
+        })
+        .catch((error) => {
+            console.error("Error al cerrar sesión:", error);
+            alert("No se pudo cerrar sesión. Intenta de nuevo.");
+        });
+}
