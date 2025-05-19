@@ -155,8 +155,8 @@ html {
   border-radius: 1rem;
   padding: 1.5rem;
   max-width: 90vw;
-  max-height: 80vh;    /* <-- Agrega esta línea */
-  overflow-y: auto;
+  max-height: 80vh; /* <-- Agrega esta línea */
+  overflow-y: scroll;
   box-sizing: border-box;
   text-align: center;
 }
