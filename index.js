@@ -102,7 +102,7 @@ window.crearCuestionario = function () {
 
     // Aquí puedes usar los valores seleccionados
     //alert(`Crear cuestionario con ${numQuestions} preguntas en áreas: ${getSelectedAreas().join(", ")}`);
-    window.location.href = "./test";
+    window.location.href = "./test.html";
 };
 
 window.onLogoutBtnClic = onLogoutBtnClic;
