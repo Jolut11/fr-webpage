@@ -32,7 +32,7 @@ html {
   right: 1rem;
   background: transparent;
   border: none;
-  font-size: 2rem;
+  font-size: 3rem;
   color: #333;
   transition: color 0.2s;
 }
@@ -46,8 +46,8 @@ html {
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  margin-top: 3rem;
-  margin-bottom: 40px;
+  margin-top: 0.5rem;
+  margin-bottom: 20px;
 }
 
 .content h2 {
@@ -219,10 +219,6 @@ html {
     flex-direction: row;
     gap: 1rem;
     justify-content: center;
-  }
-
-  .content {
-    margin-top: 2rem;
   }
 }
 
