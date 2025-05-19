@@ -1,5 +1,3 @@
-import { onLogoutBtnClic } from './auth.js';
-
 let questionsData = [];
 let currentQuestionIndex = 0;
 
@@ -127,7 +125,11 @@ function cerrarModal() {
     document.getElementById("modal").style.display = "none";
 }
 
-window.onLogoutBtnClic = onLogoutBtnClic;
+function onCloseTestBtnClic() {
+    window.location.href = "index.html";
+}
+
+window.onCloseTestBtnClic = onCloseTestBtnClic;
 window.onHelpBtnClic = onHelpBtnClic;
 window.onNextQuestionBtnClic = onNextQuestionBtnClic;
 window.onPreviousQuestionBtnClic = onPreviousQuestionBtnClic;

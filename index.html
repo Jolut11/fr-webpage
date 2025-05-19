@@ -1,83 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <base href="./" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>MediQuest</title>
-  </head>
 
-  <body>
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal">
-      <div class="modal-card">
-        <h2>Ayuda</h2>
-        <p id="helpTxt">Texto de ayuda</p>
-        <button class="close-button" onclick="cerrarModal()">Cerrar</button>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .input-container {
+            margin: 2rem auto;
+            width: 300px;
+            text-align: left;
+        }
+
+        .input-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .range-value {
+            text-align: right;
+            margin-top: 0.25rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="" alt="Perfil" id="profileImage" class="profile-img" />
+    <h2 id="userName">Cargando usuario...</h2>
+
+    <div class="input-container">
+        <label for="numQuestions">Número de preguntas (5-50):</label>
+        <input type="range" id="numQuestions" min="5" max="50" value="10">
+        <div class="range-value" id="rangeValue">10</div>
     </div>
 
-    <!-- Cargando -->
-    <div id="spinner-container">
-      <div id="spinner"></div>
+    <div class="input-container">
+        <label for="areaSelect">Área:</label>
+        <div id="areaCheckboxList"></div>
     </div>
 
-    <div class="container">
-      <div class="contenedor-navbar">
-        <button
-          class="exit-btn"
-          type="button"
-          onclick="onLogoutBtnClic()"
-          title="Salir"
-        >
-          &times
-        </button>
-      </div>
-      <div class="content" id="content">
-        <h2 id="titleTxt">Titulo</h2>
-        <div class="card">
-          <div class="question">
-            <p id="questionTxt">Texto de la pregunta</p>
-          </div>
-        </div>
-        <div class="optionscontainer">
-          <form id="formOptions">
-            <!--<div class="option">
-                      <label><input type="radio" name="respuesta" value="A" />Opción de respuesta</label>
-                  </div>-->
-          </form>
-        </div>
+    <button onclick="crearCuestionario()">Crear cuestionario</button>
+    <button onclick="onLogoutBtnClic()">Cerrar sesión</button>
 
-        <div class="buttons-container" id="buttonsContainer">
-          <button
-            class="submit-btn"
-            type="button"
-            onclick="onPreviousQuestionBtnClic()"
-          >
-            Anterior
-          </button>
-          <button class="submit-btn" type="button" onclick="onHelpBtnClic()">
-            Ayuda
-          </button>
-          <button
-            class="submit-btn"
-            type="button"
-            onclick="onNextQuestionBtnClic()"
-          >
-            Siguiente
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <script type="module" src="./script.js"></script>
     <script type="module" src="./auth.js"></script>
-  </body>
+    <script type="module" src="./index.js"></script>
+</body>
+
 </html>

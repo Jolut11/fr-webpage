@@ -1,6 +1,7 @@
-import { auth } from "./firebase-config.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { app } from './firebase-config.js';
+
+export const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
