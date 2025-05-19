@@ -82,7 +82,10 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+<<<<<<< HEAD
   height: 16px;
+=======
+>>>>>>> 420666ee432563c52490e866763c7791d0477dd1
 }
 
 .correcta {

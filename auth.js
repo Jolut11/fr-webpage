@@ -1,41 +1,30 @@
-// Tu configuración de Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyCS02oO4Q_WCQaWqYFUTioaHE6MrxufMSM",
-    authDomain: "fr-webpage-5d512.firebaseapp.com",
-    projectId: "fr-webpage-5d512",
-    storageBucket: "fr-webpage-5d512.firebasestorage.app",
-    messagingSenderId: "832827801804",
-    appId: "1:832827801804:web:5452f46c8b6dcb12a9c269",
-    measurementId: "G-5QJ5FR39MS"
-};
+import { auth } from "./firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-// Inicializa Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-
-function loginWithGoogle() {
-    auth.signInWithPopup(provider)
-        .then(result => {
-            const user = result.user;
-            document.getElementById("user-info").innerText = `Conectado como: ${user.displayName} (${user.email})`;
-        })
-        .catch(error => {
-            alert("Error al iniciar sesión: " + error.message);
-        });
-}
-
-function logout() {
-    auth.signOut().then(() => {
-        document.getElementById("user-info").innerText = "Sesión cerrada.";
-    });
-}
-
-auth.onAuthStateChanged(user => {
-    const info = document.getElementById("user-info");
+onAuthStateChanged(auth, (user) => {
     if (user) {
-        info.innerText = `Conectado como: ${user.displayName || user.email}`;
-    } else {
-        info.innerText = "No hay usuario conectado.";
+        if (window.location.pathname.endsWith("login.html") || window.location.pathname.endsWith("login")) {
+            // Si el usuario ya está autenticado y está en la página de login, redirige a la página principal
+            window.location.href = "./index.html";
+        }
+    }
+    else {
+        if (!window.location.pathname.endsWith("login.html") && !window.location.pathname.endsWith("login")) {
+            // Si el usuario no está autenticado y no está en la página de login, redirige a login
+            window.location.href = "./login.html";
+        }
     }
 });
+
+export function onLogoutBtnClic() {
+    signOut(auth)
+        .then(() => {
+            // Logout exitoso, redirigir a login
+            //window.location.href = "/fr-webpage/login.html"; // ajusta esta ruta si hace falta
+        })
+        .catch((error) => {
+            console.error("Error al cerrar sesión:", error);
+            alert("No se pudo cerrar sesión. Intenta de nuevo.");
+        });
+}

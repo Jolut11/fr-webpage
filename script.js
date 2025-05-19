@@ -1,125 +1,134 @@
+import { onLogoutBtnClic } from './auth.js';
+
 let questionsData = [];
 let currentQuestionIndex = 0;
 
-spinner = HTMLElement;
-content = HTMLElement;
+let spinner;
+let content;
 
-preguntaTxt = HTMLElement;
-tituloTxt = HTMLElement;
-formOpciones = HTMLElement;
-ayudaTxt = HTMLElement;
+let preguntaTxt;
+let tituloTxt;
+let formOpciones;
+let ayudaTxt;
 
 document.addEventListener("DOMContentLoaded", () => {
-  spinner = document.getElementById("spinner");
-  content = document.getElementById("content");
+    spinner = document.getElementById("spinner");
+    content = document.getElementById("content");
 
-  preguntaTxt = document.getElementById("questionTxt");
-  tituloTxt = document.getElementById("titleTxt");
-  formOpciones = document.getElementById("formOptions");
-  ayudaTxt = document.getElementById("helpTxt");
+    preguntaTxt = document.getElementById("questionTxt");
+    tituloTxt = document.getElementById("titleTxt");
+    formOpciones = document.getElementById("formOptions");
+    ayudaTxt = document.getElementById("helpTxt");
 
-  spinner.style.display = "block";
-  content.style.display = "none";
+    spinner.style.display = "block";
+    content.style.display = "none";
 
-  loadQuestionary(3);
+    loadQuestionary(3);
 });
 
 async function loadQuestionary(number_questions) {
-  try {
-    const payload = {
-      number_questions: number_questions,
-    };
+    try {
+        const payload = {
+            number_questions: number_questions,
+        };
 
-    const response = await fetch(
-      "https://fr-app.onrender.com/create_cuestionary",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      }
-    );
+        const response = await fetch(
+            "https://fr-app.onrender.com/create_cuestionary",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            }
+        );
 
-    if (!response.ok) {
-      throw new Error("Respuesta de red no fue ok");
+        if (!response.ok) {
+            alert("Respuesta de red no fue ok");
+            throw new Error("Respuesta de red no fue ok");
+        }
+
+        content.style.display = "block";
+        spinner.style.display = "none";
+
+        const data = await response.json();
+        questionsData = data;
+
+        renderQuestion(currentQuestionIndex);
+    } catch (error) {
+        console.error("Error al cargar el cuestionario:", error);
+        alert(
+            "Error al cargar el cuestionario. Por favor, inténtalo de nuevo más tarde." +
+            error
+        );
     }
-
-    content.style.display = "block";
-    spinner.style.display = "none";
-
-    const data = await response.json();
-    questionsData = data;
-
-    renderQuestion(currentQuestionIndex);
-  } catch (error) {
-    console.error("Error al cargar el cuestionario:", error);
-    alert(
-      "Error al cargar el cuestionario. Por favor, inténtalo de nuevo más tarde." +
-        error
-    );
-  }
 }
 
 function renderQuestion(questionIndex) {
-  if (questionIndex > questionsData.length) {
-    return;
-  }
-
-  formOpciones.innerHTML = "";
-
-  tituloTxt.textContent =
-    "Pregunta " + (1 + questionIndex) + " de " + questionsData.length;
-  preguntaTxt.textContent = questionsData[questionIndex].s;
-  ayudaTxt.textContent = questionsData[questionIndex].j;
-
-  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-  questionsData[questionIndex].o.forEach((opcion, index) => {
-    if (JSON.stringify(opcion.t) == '""') {
-      return;
+    if (questionIndex > questionsData.length) {
+        return;
     }
 
-    const valor = letras[index]; // A, B, C, ...
+    formOpciones.innerHTML = "";
 
-    const div = document.createElement("div");
-    div.className = "option";
+    tituloTxt.textContent =
+        "Pregunta " + (1 + questionIndex) + " de " + questionsData.length;
+    preguntaTxt.textContent = questionsData[questionIndex].s;
+    ayudaTxt.textContent = questionsData[questionIndex].j;
 
-    const label = document.createElement("label");
+    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = "respuesta";
-    input.value = valor;
+    questionsData[questionIndex].o.forEach((opcion, index) => {
+        if (JSON.stringify(opcion.t) == '""') {
+            return;
+        }
 
-    label.appendChild(input);
-    label.append(opcion.t);
+        const valor = letras[index]; // A, B, C, ...
 
-    div.appendChild(label);
-    formOpciones.appendChild(div);
-  });
+        const div = document.createElement("div");
+        div.className = "option";
+
+        const label = document.createElement("label");
+
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "respuesta";
+        input.value = valor;
+
+        label.appendChild(input);
+        label.append(opcion.t);
+
+        div.appendChild(label);
+        formOpciones.appendChild(div);
+    });
 }
 
 function onHelpBtnClic() {
-  document.getElementById("modal").style.display = "flex";
+    document.getElementById("modal").style.display = "flex";
 }
 
 function onNextQuestionBtnClic() {
-  if (currentQuestionIndex >= questionsData.length - 1) {
-    return;
-  }
-  currentQuestionIndex++;
-  renderQuestion(currentQuestionIndex);
+    if (currentQuestionIndex >= questionsData.length - 1) {
+        return;
+    }
+    currentQuestionIndex++;
+    renderQuestion(currentQuestionIndex);
 }
 
 function onPreviousQuestionBtnClic() {
-  if (currentQuestionIndex <= 0) {
-    return;
-  }
-  currentQuestionIndex--;
-  renderQuestion(currentQuestionIndex);
+    if (currentQuestionIndex <= 0) {
+        return;
+    }
+    currentQuestionIndex--;
+    renderQuestion(currentQuestionIndex);
 }
 
 function cerrarModal() {
-  document.getElementById("modal").style.display = "none";
+    document.getElementById("modal").style.display = "none";
 }
+
+window.onLogoutBtnClic = onLogoutBtnClic;
+window.onHelpBtnClic = onHelpBtnClic;
+window.onNextQuestionBtnClic = onNextQuestionBtnClic;
+window.onPreviousQuestionBtnClic = onPreviousQuestionBtnClic;
+window.cerrarModal = cerrarModal;
