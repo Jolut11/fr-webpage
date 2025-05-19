@@ -155,7 +155,7 @@ html {
   border-radius: 1rem;
   padding: 1.5rem;
   max-width: 90vw;
-  overflow-y: scroll;
+  overflow-y: auto;
   box-sizing: border-box;
   text-align: center;
 }
