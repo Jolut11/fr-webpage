@@ -113,7 +113,7 @@ html {
 
 .buttons-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.5rem;
   max-width: 800px;
   margin: auto;
@@ -214,12 +214,6 @@ html {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     background: #fff;
   }
-
-  .buttons-container {
-    flex-direction: row;
-    gap: 1rem;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 390px) {
@@ -227,6 +221,11 @@ html {
     width: 100%;
   }
 
+  .option {
+    width: 95%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
   .card {
     margin: 10px;
   }
