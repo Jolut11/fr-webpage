@@ -73,6 +73,10 @@ html {
 .question {
   font-size: 1.1rem;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .imagen {
@@ -227,7 +231,8 @@ html {
   }
 
   .imagen {
-    max-width: 100%;
+    max-width: 90vw;
+    height: auto;
   }
 }
 
