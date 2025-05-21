@@ -78,6 +78,10 @@ html {
   align-items: center;
 }
 
+.question p {
+  padding-bottom: 0.5rem;
+}
+
 .imagen {
   object-fit: cover;
   height: 300px;
@@ -86,6 +90,16 @@ html {
   display: block;
   margin: 0 auto;
 }
+
+.modal-img {
+  display: block;
+  margin: 0 auto 1rem auto;
+  width: 400px;
+  height: 100%;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
 .optionscontainer {
   margin-bottom: 1rem;
   margin-top: 30px;
@@ -175,6 +189,7 @@ html {
 
 .modal-card h2 {
   margin-top: 0;
+  display: flex;
 }
 
 .close-button {
@@ -186,6 +201,9 @@ html {
   font-size: 1rem;
   cursor: pointer;
   margin-top: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .close-button:hover {
