@@ -190,6 +190,7 @@ html {
 .modal-card h2 {
   margin-top: 0;
   display: flex;
+  justify-content: center;
 }
 
 .close-button {
