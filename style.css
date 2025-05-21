@@ -94,7 +94,7 @@ html {
 .modal-img {
   display: block;
   margin: 0 auto 1rem auto;
-  width: 400px;
+  width: 300px;
   height: 100%;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -191,6 +191,7 @@ html {
   margin-top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .close-button {
