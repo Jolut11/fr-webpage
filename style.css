@@ -94,8 +94,8 @@ html {
 .modal-img {
   display: block;
   margin: 0 auto 1rem auto;
-  width: 300px;
-  max-width: 90vw;
+  max-width: 300px;
+  width: 100%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -260,9 +260,11 @@ html {
 
 @media (max-width: 600px) {
   .modal-img {
-    width: 100%;
+    width: 90vw;
     max-width: 90vw;
+    min-width: 0;
     height: auto;
+    box-sizing: border-box;
   }
 }
 
