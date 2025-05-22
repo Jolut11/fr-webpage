@@ -1,89 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <base href="./" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>MediQuest</title>
-  </head>
 
-  <body>
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal">
-      <div class="modal-card">
-        <h2>Ayuda</h2>
-        <img
-          src="https://picsum.photos/150/100"
-          alt="Imagen de ayuda"
-          class="modal-img"
-        />
-        <p id="helpTxt">Texto de ayuda</p>
-        <button class="close-button" onclick="cerrarModal()">Cerrar</button>
-      </div>
+<head>
+  <base href="./" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>MediQuest</title>
+</head>
+
+<body>
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-card">
+      <h2>Ayuda</h2>
+      <img src="" class="modal-img" id="helpImg" />
+      <p id="helpTxt">Texto de ayuda</p>
+      <button class="close-button" onclick="cerrarModal()">Cerrar</button>
     </div>
+  </div>
 
-    <!-- Cargando -->
-    <div id="spinner-container">
-      <div id="spinner"></div>
+  <!-- Cargando -->
+  <div id="spinner-container">
+    <div id="spinner"></div>
+  </div>
+
+  <div class="container">
+    <div class="contenedor-navbar">
+      <button class="exit-btn" type="button" onclick="onCloseTestBtnClic()" title="Salir">
+        &times
+      </button>
     </div>
-
-    <div class="container">
-      <div class="contenedor-navbar">
-        <button
-          class="exit-btn"
-          type="button"
-          onclick="onCloseTestBtnClic()"
-          title="Salir"
-        >
-          &times
-        </button>
-      </div>
-      <div class="content" id="content">
-        <h2 id="titleTxt">Titulo</h2>
-        <div class="card">
-          <div class="question">
-            <p id="questionTxt">Texto de la pregunta</p>
-            <img src="https://picsum.photos/200/300" alt="" class="imagen" />
-          </div>
+    <div class="content" id="content">
+      <h2 id="titleTxt">Titulo</h2>
+      <div class="card">
+        <div class="question">
+          <p id="questionTxt">Texto de la pregunta</p>
+          <img src="" class="imagen" id="questionImg" />
         </div>
-        <div class="optionscontainer">
-          <form id="formOptions">
-            <!--<div class="option">
+      </div>
+      <div class="optionscontainer">
+        <form id="formOptions">
+          <!--<div class="option">
                       <label><input type="radio" name="respuesta" value="A" />Opción de respuesta</label>
                   </div>-->
-          </form>
-        </div>
+        </form>
+      </div>
 
-        <div class="buttons-container" id="buttonsContainer">
-          <button
-            class="submit-btn"
-            type="button"
-            onclick="onPreviousQuestionBtnClic()"
-          >
-            Anterior
-          </button>
-          <button class="submit-btn" type="button" onclick="onHelpBtnClic()">
-            Ayuda
-          </button>
-          <button
-            class="submit-btn"
-            type="button"
-            onclick="onNextQuestionBtnClic()"
-          >
-            Siguiente
-          </button>
-        </div>
+      <div class="buttons-container" id="buttonsContainer">
+        <button class="submit-btn" type="button" onclick="onPreviousQuestionBtnClic()">
+          Anterior
+        </button>
+        <button class="submit-btn" type="button" onclick="onHelpBtnClic()">
+          Ayuda
+        </button>
+        <button class="submit-btn" type="button" onclick="onNextQuestionBtnClic()">
+          Siguiente
+        </button>
       </div>
     </div>
+  </div>
 
-    <script type="module" src="./test.js"></script>
-    <script type="module" src="./auth.js"></script>
-  </body>
+  <script type="module" src="./test.js"></script>
+  <script type="module" src="./auth.js"></script>
+</body>
+
 </html>

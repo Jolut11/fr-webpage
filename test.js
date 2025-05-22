@@ -4,19 +4,23 @@ let currentQuestionIndex = 0;
 let spinner;
 let content;
 
-let preguntaTxt;
 let tituloTxt;
+let preguntaTxt;
+let preguntaImg;
 let formOpciones;
 let ayudaTxt;
+let ayudaImg;
 
 document.addEventListener("DOMContentLoaded", () => {
   spinner = document.getElementById("spinner");
   content = document.getElementById("content");
 
-  preguntaTxt = document.getElementById("questionTxt");
   tituloTxt = document.getElementById("titleTxt");
+  preguntaTxt = document.getElementById("questionTxt");
+  preguntaImg = document.getElementById("questionImg");
   formOpciones = document.getElementById("formOptions");
   ayudaTxt = document.getElementById("helpTxt");
+  ayudaImg = document.getElementById("helpImg");
 
   spinner.style.display = "block";
   content.style.display = "none";
@@ -57,7 +61,7 @@ async function loadQuestionary(number_questions) {
     console.error("Error al cargar el cuestionario:", error);
     alert(
       "Error al cargar el cuestionario. Por favor, inténtalo de nuevo más tarde." +
-        error
+      error
     );
   }
 }
@@ -73,6 +77,20 @@ function renderQuestion(questionIndex) {
     "Pregunta " + (1 + questionIndex) + " de " + questionsData.length;
   preguntaTxt.textContent = questionsData[questionIndex].s;
   ayudaTxt.textContent = questionsData[questionIndex].j;
+
+  //cargamos las imágenes
+  // si el length de la imagen es undefined quiere decir que el objeto contenido no es una lista sino un diccionario por tanto hay imagen
+  preguntaImg.src = typeof questionsData[questionIndex].i[0].length === "undefined" ? questionsData[questionIndex].i[0].src : "";
+  console.log(questionsData[questionIndex].i[0]);
+  console.log(questionsData[questionIndex].i[0].length);
+  console.log(preguntaImg.src);
+  preguntaImg.onerror = function (e) {
+    console.log("Error al cargar la imagen" + e.target.src);
+  };
+  preguntaImg.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBgCPQmyPHrOWxnUvbmQIRwOipjW8woZUreA&s";
+  preguntaImg.style.display = "block";
+  //ayudaImg.src = questionsData[questionIndex].ji;
+  //ayudaImg.style.display = ayudaImg.src ? "block" : "none";
 
   const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
