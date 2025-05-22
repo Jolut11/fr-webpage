@@ -1,14 +1,23 @@
-/* 1. Estilos base para móviles */
 body {
   font-family: "Quicksand", "Roboto", Arial, sans-serif;
   margin: 0;
   padding: 0;
   background: #f9f9f9;
   color: #222;
+
+  --strong: #203936;
+  --light: #44857a;
+  --fondo: #faf8fd;
+  --fondo-2: #cfdce4;
+  --enfasis: #e06f17;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--fondo);
 }
 
 .container {
@@ -52,6 +61,9 @@ html {
 
 .content h2 {
   text-align: center;
+  color: var(--light);
+  padding-bottom: 1rem;
+  border-bottom: thin solid var(--strong);
 }
 
 .card {
