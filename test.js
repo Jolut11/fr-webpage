@@ -79,18 +79,20 @@ function renderQuestion(questionIndex) {
   ayudaTxt.textContent = questionsData[questionIndex].j;
 
   //cargamos las imágenes
-  // si el length de la imagen es undefined quiere decir que el objeto contenido no es una lista sino un diccionario por tanto hay imagen
-  preguntaImg.src = typeof questionsData[questionIndex].i[0].length === "undefined" ? questionsData[questionIndex].i[0].src : "";
-  console.log(questionsData[questionIndex].i[0]);
-  console.log(questionsData[questionIndex].i[0].length);
-  console.log(preguntaImg.src);
-  preguntaImg.onerror = function (e) {
-    console.log("Error al cargar la imagen" + e.target.src);
+  preguntaImg.onerror = function () {
+    preguntaImg.style.display = "none";
   };
-  preguntaImg.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBgCPQmyPHrOWxnUvbmQIRwOipjW8woZUreA&s";
-  preguntaImg.style.display = "block";
-  //ayudaImg.src = questionsData[questionIndex].ji;
-  //ayudaImg.style.display = ayudaImg.src ? "block" : "none";
+  // si el length de la imagen es undefined quiere decir que el objeto contenido no es una lista sino un diccionario por tanto hay imagen
+  preguntaImg.src = typeof questionsData[questionIndex].i[0].length === "undefined" ? questionsData[questionIndex].i[0].src.replace("https://app.cursofuturosresidentes.com/wp-content/uploads/simulations/Imagen ", "images/") : "";
+  preguntaImg.style.display = preguntaImg.src && preguntaImg.src.trim() !== "" ? "block" : "none";
+
+
+  ayudaImg.onerror = function () {
+    ayudaImg.style.display = "none";
+  };
+  console.log(questionsData[questionIndex].ji);
+  ayudaImg.src = questionsData[questionIndex].ji.length > 0 ? questionsData[questionIndex].ji[0].replace("https://app.cursofuturosresidentes.com/wp-content/uploads/simulations/Imagen ", "images/") : "";
+  ayudaImg.style.display = ayudaImg.src && ayudaImg.src.trim() !== "" ? "block" : "none";
 
   const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
