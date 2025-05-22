@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <base href="./" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="login-styles.css" />
 
-<head>
-    <meta charset="UTF-8">
     <title>Login con Google (Firebase)</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
 
-        #user-info {
-            margin-top: 20px;
-        }
+      #user-info {
+        margin-top: 20px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h2>Iniciar sesión con Google</h2>
+        <button class="boton boton-login" onclick="loginWithGoogle()">
+          Iniciar sesión con Google
+        </button>
+        <button class="boton boton-logout" onclick="logout()">
+          Cerrar sesión
+        </button>
 
-    <h2>Iniciar sesión con Google</h2>
-    <button onclick="loginWithGoogle()">Iniciar sesión con Google</button>
-    <button onclick="logout()">Cerrar sesión</button>
-
-    <div id="user-info"></div>
+        <div id="user-info"></div>
+      </div>
+    </div>
 
     <!--Firebase SDKs-->
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
     <script type="module" src="./login.js"></script>
     <script type="module" src="./auth.js"></script>
-</body>
-
+  </body>
 </html>
