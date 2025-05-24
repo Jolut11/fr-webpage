@@ -156,13 +156,13 @@ function renderQuestion(questionIndex) {
 
     div.appendChild(label);
 
-    div.addEventListener("click", () => onAnswerOptionClic(currentTestQuestions[questionIndex].qid, opcion.id));
+    div.addEventListener("click", () => onAnswerOptionClic(currentTestQuestions[questionIndex].qid, opcion.id, opcion.v, currentTestQuestions[questionIndex].sp));
 
     formOpciones.appendChild(div);
   });
 }
 
-async function onAnswerOptionClic(questionId, selectedAnswerId) {
+async function onAnswerOptionClic(questionId, selectedAnswerId, isCorrect, area) {
   const user = auth.currentUser;
   if (!user) {
     console.error("Usuario no autenticado");
@@ -192,6 +192,8 @@ async function onAnswerOptionClic(questionId, selectedAnswerId) {
   // Actualizar respuesta con updateDoc
   await updateDoc(quizRef, {
     [`questions.${questionId}.selectedAnswer`]: selectedAnswerId,
+    [`questions.${questionId}.isCorrect`]: isCorrect,
+    [`questions.${questionId}.area`]: area,
     lastUpdated: serverTimestamp()
   });
 
