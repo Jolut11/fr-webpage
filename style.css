@@ -149,6 +149,13 @@ body {
   color: #58151c;
 }
 
+.deshabilitada {
+  background-color: #e8e8e800;
+  /*f1aeb5*/
+  border: thin solid #a8a8a86b;
+  color: #8b8b8bb2;
+}
+
 .buttons-container {
   display: flex;
   flex-direction: row;
@@ -290,6 +297,7 @@ body {
     margin-bottom: 10px;
     margin-top: 10px;
   }
+
   .card {
     margin: 10px;
   }

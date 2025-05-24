@@ -92,6 +92,7 @@ window.crearCuestionario = function () {
         return;
     }
 
+    sessionStorage.setItem("test_id", Date.now().toString());
     sessionStorage.setItem("number_questions", document.getElementById("numQuestions").value);
     console.log(document.getElementById("numQuestions").value)
     sessionStorage.setItem("test_areas", JSON.stringify(getSelectedAreas()));

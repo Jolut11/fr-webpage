@@ -1,6 +1,8 @@
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 import { app } from './firebase-config.js';
 
+export const db = getFirestore(app);
 export const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
