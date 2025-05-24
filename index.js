@@ -29,16 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function cargarAreas() {
     try {
-        //const response = await fetch("https://fr-app.onrender.com/get_areas"); // Ajusta URL si es otra
-        //const data = await response.json();
+        const response = await fetch("https://fr-app.onrender.com/get_areas"); // Ajusta URL si es otra
+        const data = await response.json();
 
         const contenedor = document.getElementById("areaCheckboxList");
-
-        const data = [
-            { id: "all", name: "Todas las áreas" },
-            { id: 2, name: "Medicina interna" },
-            { id: 2, name: "Radiología" }
-        ]
 
         contenedor.innerHTML = "";
 
@@ -51,22 +45,22 @@ async function cargarAreas() {
 
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.id = `area-${area.id}`;
-            checkbox.value = area.name;
+            checkbox.id = `area-${area}`;
+            checkbox.value = area;
             checkbox.name = "area";
 
             const label = document.createElement("label");
-            label.setAttribute("for", `area-${area.id}`);
-            label.textContent = area.name;
+            label.setAttribute("for", `area-${area}`);
+            label.textContent = area;
 
             div.appendChild(checkbox);
             div.appendChild(label);
             contenedor.appendChild(div);
 
             // Si es el checkbox "Todas las áreas", añadirle el evento aquí
-            if (area.id === "all") {
+            if (area === "Todas") {
                 checkbox.addEventListener("change", () => {
-                    const otherCheckboxes = contenedor.querySelectorAll('input[name="area"]:not(#area-all)');
+                    const otherCheckboxes = contenedor.querySelectorAll('input[name="area"]:not(#area-Todas)');
                     otherCheckboxes.forEach(cb => {
                         cb.checked = checkbox.checked;
                     });
@@ -74,7 +68,7 @@ async function cargarAreas() {
             }
             else {
                 checkbox.addEventListener("change", () => {
-                    const allCheckbox = contenedor.querySelector('#area-all');
+                    const allCheckbox = contenedor.querySelector('#area-Todas');
                     allCheckbox.checked = false;
                 });
             }
