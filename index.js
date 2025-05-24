@@ -87,12 +87,14 @@ function getSelectedAreas() {
 }
 
 window.crearCuestionario = function () {
-    const numQuestions = document.getElementById("numQuestions").value;
-
     if (getSelectedAreas().length === 0) {
         alert("Selecciona al menos un área");
         return;
     }
+
+    sessionStorage.setItem("number_questions", document.getElementById("numQuestions").value);
+    console.log(document.getElementById("numQuestions").value)
+    sessionStorage.setItem("test_areas", JSON.stringify(getSelectedAreas()));
 
     // Aquí puedes usar los valores seleccionados
     //alert(`Crear cuestionario con ${numQuestions} preguntas en áreas: ${getSelectedAreas().join(", ")}`);

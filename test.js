@@ -25,13 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
   spinner.style.display = "block";
   content.style.display = "none";
 
-  loadQuestionary(3);
+  loadQuestionary(parseInt(sessionStorage.getItem("number_questions")), sessionStorage.getItem("test_areas"));
 });
 
-async function loadQuestionary(number_questions) {
+async function loadQuestionary(number_questions, test_areas) {
   try {
     const payload = {
       number_questions: number_questions,
+      test_areas: test_areas ? JSON.parse(test_areas) : [],
     };
 
     const response = await fetch(
