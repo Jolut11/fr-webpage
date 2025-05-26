@@ -19,6 +19,7 @@ let ayudaImg;
 let currentTestQuestions = [];
 let currentQuestionIndex = 0;
 let currentTestAnswers = {};
+let testSaved = false;
 
 // ID DEL CUESTIONARIO, SOLO SE OBTIENE SI YA SE HA CONTESTADO POR LO MENOS UNA PREGUNTA
 let test_id = sessionStorage.getItem("test_id");
@@ -84,8 +85,6 @@ function renderQuestion(questionIndex) {
     return;
   }
 
-  formOpciones.innerHTML = "";
-
   tituloTxt.textContent =
     "Pregunta " + (1 + questionIndex) + " de " + currentTestQuestions.length;
   preguntaTxt.textContent = currentTestQuestions[questionIndex].s;
@@ -107,58 +106,80 @@ function renderQuestion(questionIndex) {
   ayudaImg.src = currentTestQuestions[questionIndex].ji.length > 0 ? currentTestQuestions[questionIndex].ji[0].replace("https://app.cursofuturosresidentes.com/wp-content/uploads/simulations/Imagen ", "images/") : "";
   ayudaImg.style.display = ayudaImg.src && ayudaImg.src.trim() !== "" ? "block" : "none";
 
-  //RENDERIZADO DE OPCIONES
-  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  currentTestQuestions[questionIndex].o.forEach((opcion, index) => {
-    if (JSON.stringify(opcion.t) == '""') {
-      return;
-    }
 
-    const valor = letras[index]; // A, B, C, ...
+  // SI LA PREGUNTA ACTUAL ESTÁ EN LA LISTA DE PREGUNTAS CONTESTADAS ACTUALIZAMOS EL ESTADO
+  if (currentTestQuestions[questionIndex].qid in currentTestAnswers) {
+    updateOptionsState(questionIndex);
+  }
+  // SI LA PREGUNTA NO HA SIDO CONTESTADA CARGAMOS TODAS LAS OPACIONES
+  else {
+    formOpciones.innerHTML = "";
 
-    const div = document.createElement("div");
-
-    div.className = "option";
-    div.style.pointerEvents = "auto";
-
-    const currentQuestionId = currentTestQuestions[questionIndex].qid;
-    // LA PREGUNTA ACTUAL ESTÁ EN LA LISTA DE PREGUNTAS RESPONDIDAS?
-    if (currentQuestionId in currentTestAnswers) {
-      div.className = "deshabilitada";
-      div.style.pointerEvents = "none";
-
-      // SI LA OPCION ACTUAL FUE LA SELECCIONADA
-      if (opcion.id == currentTestAnswers[currentQuestionId]) {
-        if (opcion.v == 1) {
-          div.className = "correcta";
-        }
-        else {
-          div.className = "incorrecta";
-        }
+    //RENDERIZADO DE OPCIONES
+    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    currentTestQuestions[questionIndex].o.forEach((opcion, index) => {
+      if (JSON.stringify(opcion.t) == '""') {
+        return;
       }
-      // SI NO FUE LA SELECCIONADA PERO ES LA CORRECTA, MOSTRARLA
+
+      const valor = letras[index]; // A, B, C, ...
+
+      const div = document.createElement("div");
+
+      div.className = "option";
+      div.style.pointerEvents = "auto";
+
+      const label = document.createElement("label");
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "respuesta";
+      input.value = valor;
+      input.addEventListener("click", () => onAnswerOptionClic(currentTestQuestions[questionIndex].qid, opcion.id, opcion.v, currentTestQuestions[questionIndex].sp));
+
+      label.appendChild(input);
+      label.append(opcion.t);
+
+      div.appendChild(label);
+
+      formOpciones.appendChild(div);
+    });
+  }
+}
+
+function updateOptionsState(questionIndex) {
+  const currentQuestionId = currentTestQuestions[questionIndex].qid;
+  const respuestas = currentTestQuestions[questionIndex].o.filter(opcion => opcion.t.trim() !== "");
+  const opcionesDivs = formOpciones.querySelectorAll(".option");
+
+  respuestas.forEach((opcion, index) => {
+    const div = opcionesDivs[index];
+    const input = div.querySelector("input");
+
+    div.classList.remove("correcta", "incorrecta", "deshabilitada");
+    div.style.pointerEvents = "none"; // evitar más clics
+    input.disabled = true;
+
+    // SI LA OPCION FUE SELECCIONADA
+    if (opcion.id == currentTestAnswers[currentQuestionId]) {
+      if (opcion.v === 1) {
+        div.classList.add("correcta");
+      } else {
+        div.classList.add("incorrecta");
+      }
+    }
+    // SI NO FUE LA SELECCIONADA PERO ES CORRECTA
+    else {
+      if (opcion.v === 1) {
+        div.classList.add("correcta");
+      }
       else {
-        if (opcion.v == 1) {
-          div.className = "correcta";
-        }
+        div.classList.add("deshabilitada");
       }
     }
 
-    const label = document.createElement("label");
-
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = "respuesta";
-    input.value = valor;
-
-    label.appendChild(input);
-    label.append(opcion.t);
-
-    div.appendChild(label);
-
-    div.addEventListener("click", () => onAnswerOptionClic(currentTestQuestions[questionIndex].qid, opcion.id, opcion.v, currentTestQuestions[questionIndex].sp));
-
-    formOpciones.appendChild(div);
+    // En todos los casos se desactiva visualmente
+    //div.classList.add("deshabilitada");
   });
 }
 
@@ -172,34 +193,46 @@ async function onAnswerOptionClic(questionId, selectedAnswerId, isCorrect, area)
 
   const userId = user.uid;
   const quizRef = doc(db, "users", userId, "quizzes", test_id);
-  const docSnap = await getDoc(quizRef);
 
-  // Si no existe, guardar todas las preguntas sin respuestas
-  if (!docSnap.exists()) {
-    const questionsMap = {};
-    currentTestQuestions.forEach(q => {
-      questionsMap[q.qid] = { selectedAnswer: null };
-    });
+  // ACTUALIZAMOS LA RESPUESTA EN PANTALLA Y EN LOCAL
+  currentTestAnswers[questionId] = selectedAnswerId;
+  updateOptionsState(currentQuestionIndex);
 
-    await setDoc(quizRef, {
-      startedAt: serverTimestamp(),
-      lastUpdated: serverTimestamp(),
-      completed: false,
-      questions: questionsMap
-    });
+  // VERITICAMOS SI NO HAY RESPUESTAS GUARADDAS
+  if (!testSaved) {
+    console.log("No hay respuestas guardadas, creando nuevo cuestionario...");
+    const docSnap = await getDoc(quizRef);
+
+    // Si no existe, guardar todas las preguntas sin respuestas
+    if (!docSnap.exists()) {
+      const questionsMap = {};
+      currentTestQuestions.forEach(q => {
+        questionsMap[q.qid] = { selectedAnswer: null };
+      });
+
+      await setDoc(quizRef, {
+        startedAt: serverTimestamp(),
+        lastUpdated: serverTimestamp(),
+        completed: false,
+        questions: questionsMap
+      });
+    }
+    testSaved = true; // Marcamos que ya se ha guardado al menos una respuesta
   }
 
   // Actualizar respuesta con updateDoc
-  await updateDoc(quizRef, {
-    [`questions.${questionId}.selectedAnswer`]: selectedAnswerId,
-    [`questions.${questionId}.isCorrect`]: isCorrect,
-    [`questions.${questionId}.area`]: area,
-    lastUpdated: serverTimestamp()
-  });
-
-  currentTestAnswers[questionId] = selectedAnswerId;
-
-  renderQuestion(currentQuestionIndex);
+  try {
+    await updateDoc(quizRef, {
+      [`questions.${questionId}.selectedAnswer`]: selectedAnswerId,
+      [`questions.${questionId}.isCorrect`]: isCorrect,
+      [`questions.${questionId}.area`]: area,
+      lastUpdated: serverTimestamp()
+    });
+  } catch (error) {
+    alert("Error al guardar la respuesta: " + error);
+    delete currentTestAnswers[questionId];
+    renderQuestion(currentQuestionIndex);
+  }
 
   console.log("Respuesta guardada para la pregunta:", questionId);
 }
