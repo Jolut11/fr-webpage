@@ -1,9 +1,8 @@
-import { auth, onLogoutBtnClic } from './auth.js';
+import { auth, db, onLogoutBtnClic } from './auth.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const user = auth.currentUser;
-
     const profileImage = document.getElementById("profileImage");
     const userName = document.getElementById("userName");
     const rangeInput = document.getElementById("numQuestions");
@@ -14,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (user) {
             userName.textContent = user.displayName || user.email;
             profileImage.src = user.photoURL || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
+
+            cargarCuestionariosGuardados(user);
         } else {
             userName.textContent = "Usuario no autenticado";
             profileImage.src = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
@@ -26,6 +27,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cargarAreas();
 });
+
+async function cargarCuestionariosGuardados(user) {
+    const userId = user.uid;
+    const quizzesCol = collection(db, "users", userId, "quizzes");
+
+    try {
+        const querySnapshot = await getDocs(quizzesCol);
+
+        const container = document.getElementById("quizList");
+        container.innerHTML = "";
+
+        querySnapshot.forEach((docSnap) => {
+            const quizId = docSnap.id;
+
+            // Crear contenedor para el botón y el botón de borrar
+            const wrapper = document.createElement("div");
+            wrapper.style.display = "flex";
+            wrapper.style.gap = "10px";
+            wrapper.style.marginBottom = "10px";
+
+            // Botón para cargar test
+            const quizBtn = document.createElement("button");
+            const fecha = new Date(parseInt(quizId));
+            const fechaLegible = fecha.toLocaleString(); // o toLocaleDateString() solo fecha
+            quizBtn.textContent = fechaLegible;
+            quizBtn.style.flexGrow = "1";
+            quizBtn.onclick = () => cargarCuestionario(quizId);
+
+            // Botón de borrar
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "🗑️";
+            deleteBtn.style.backgroundColor = "#f44336";
+            deleteBtn.style.color = "white";
+            deleteBtn.style.border = "none";
+            deleteBtn.style.cursor = "pointer";
+            deleteBtn.onclick = async () => {
+                if (confirm(`¿Eliminar quiz ${quizId}?`)) {
+                    await deleteDoc(doc(db, "users", userId, "quizzes", quizId));
+                    wrapper.remove(); // Eliminar del DOM
+                }
+            };
+
+            wrapper.appendChild(quizBtn);
+            wrapper.appendChild(deleteBtn);
+            container.appendChild(wrapper);
+        });
+
+    } catch (error) {
+        console.error("Error al cargar quizzes:", error);
+        alert("Error al obtener los quizzes");
+    }
+}
 
 async function cargarAreas() {
     try {
@@ -94,12 +147,16 @@ window.crearCuestionario = function () {
 
     sessionStorage.setItem("test_id", Date.now().toString());
     sessionStorage.setItem("number_questions", document.getElementById("numQuestions").value);
-    console.log(document.getElementById("numQuestions").value)
     sessionStorage.setItem("test_areas", JSON.stringify(getSelectedAreas()));
 
     // Aquí puedes usar los valores seleccionados
     //alert(`Crear cuestionario con ${numQuestions} preguntas en áreas: ${getSelectedAreas().join(", ")}`);
     window.location.href = "./test.html";
 };
+
+window.cargarCuestionario = function (testId) {
+    sessionStorage.setItem("test_id", testId);
+    window.location.href = "./test.html";
+}
 
 window.onLogoutBtnClic = onLogoutBtnClic;

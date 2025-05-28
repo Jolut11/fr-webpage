@@ -4,9 +4,9 @@ Este archivo contiene las tareas pendientes, mejoras y bugs conocidos de la app.
 
 ## ✅ Funcionalidad principal
 - [x] Renderizar preguntas y opciones dinámicamente
-- [ ] Crear un visualizador de historial de cuestionarios pasados
-- [ ] Añadir la opcion de eleminar cuestionarios pasados
-- [ ] Habiliar la opcion de reanudar un cuestionario anterior
+- [x] Crear un visualizador de historial de cuestionarios pasados
+- [x] Añadir la opcion de eleminar cuestionarios pasados
+- [x] Habiliar la opcion de reanudar un cuestionario anterior
 - [ ] Crear un visualizador de porcentaje de aciertos general
 - [ ] Crear un visualizador de porcentaje de aciertos por areas
 
