@@ -34,26 +34,61 @@ async function cargarCuestionariosGuardados(user) {
 
     try {
         const querySnapshot = await getDocs(quizzesCol);
-
         const container = document.getElementById("quizList");
         container.innerHTML = "";
 
         querySnapshot.forEach((docSnap) => {
             const quizId = docSnap.id;
+            const data = docSnap.data();
 
-            // Crear contenedor para el botón y el botón de borrar
+            // Obtener preguntas desde el campo tipo mapa
+            const preguntasMap = data.questions || {};
+            const preguntasArray = Object.values(preguntasMap);
+
+            const total = preguntasArray.length;
+            const respondidas = preguntasArray.filter(p =>
+                typeof p.selectedAnswer === "string" && p.selectedAnswer.trim() !== ""
+            ).length;
+
+            console.log(`Quiz ${quizId}: ${respondidas}/${total} respondidas`);
+
+            // Crear botón contenedor de todo (excepto el botón de borrar)
+            const quizBtn = document.createElement("button");
+            quizBtn.style.display = "flex";
+            quizBtn.style.justifyContent = "space-between";
+            quizBtn.style.alignItems = "center";
+            quizBtn.style.width = "100%";
+            quizBtn.style.border = "1px solid #ccc";
+            quizBtn.style.borderRadius = "8px";
+            quizBtn.style.padding = "10px";
+            quizBtn.style.marginBottom = "10px";
+            quizBtn.style.cursor = "pointer";
+            quizBtn.style.background = "white";
+            quizBtn.onmouseover = () => quizBtn.style.background = "#f9f9f9";
+            quizBtn.onmouseout = () => quizBtn.style.background = "white";
+            quizBtn.onclick = () => cargarCuestionario(quizId);
+
+            // Izquierda: fecha
+            const fecha = new Date(parseInt(quizId));
+            const fechaLegible = fecha.toLocaleString();
+            const fechaDiv = document.createElement("div");
+            fechaDiv.textContent = fechaLegible;
+
+            // Derecha: info de preguntas
+            const preguntasInfo = document.createElement("div");
+            preguntasInfo.textContent = `📋 ${respondidas}/${total}`;
+            preguntasInfo.style.fontSize = "0.9em";
+            preguntasInfo.style.color = "#555";
+
+            quizBtn.appendChild(fechaDiv);
+            quizBtn.appendChild(preguntasInfo);
+
+            // Contenedor de línea con el botón de borrar al lado derecho
             const wrapper = document.createElement("div");
             wrapper.style.display = "flex";
-            wrapper.style.gap = "10px";
-            wrapper.style.marginBottom = "10px";
-
-            // Botón para cargar test
-            const quizBtn = document.createElement("button");
-            const fecha = new Date(parseInt(quizId));
-            const fechaLegible = fecha.toLocaleString(); // o toLocaleDateString() solo fecha
-            quizBtn.textContent = fechaLegible;
-            quizBtn.style.flexGrow = "1";
-            quizBtn.onclick = () => cargarCuestionario(quizId);
+            wrapper.style.alignItems = "center";
+            wrapper.style.justifyContent = "space-between";
+            wrapper.appendChild(quizBtn);
 
             // Botón de borrar
             const deleteBtn = document.createElement("button");
@@ -61,15 +96,18 @@ async function cargarCuestionariosGuardados(user) {
             deleteBtn.style.backgroundColor = "#f44336";
             deleteBtn.style.color = "white";
             deleteBtn.style.border = "none";
+            deleteBtn.style.borderRadius = "4px";
             deleteBtn.style.cursor = "pointer";
-            deleteBtn.onclick = async () => {
+            deleteBtn.style.marginLeft = "10px";
+            deleteBtn.style.padding = "6px 10px";
+            deleteBtn.onclick = async (e) => {
+                e.stopPropagation(); // Evitar que se dispare el clic de cargar
                 if (confirm(`¿Eliminar quiz ${quizId}?`)) {
                     await deleteDoc(doc(db, "users", userId, "quizzes", quizId));
-                    wrapper.remove(); // Eliminar del DOM
+                    wrapper.remove();
                 }
             };
 
-            wrapper.appendChild(quizBtn);
             wrapper.appendChild(deleteBtn);
             container.appendChild(wrapper);
         });
