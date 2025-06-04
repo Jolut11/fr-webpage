@@ -1,69 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            padding: 2rem;
-        }
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 2rem;
+      }
 
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+      }
 
-        .input-container {
-            margin: 2rem auto;
-            width: 300px;
-            text-align: left;
-        }
+      .input-container {
+        margin: 2rem auto;
+        width: 300px;
+        text-align: left;
+      }
 
-        .input-container label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+      .input-container label {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
 
-        .range-value {
-            text-align: right;
-            margin-top: 0.25rem;
-            font-weight: bold;
-        }
+      .range-value {
+        text-align: right;
+        margin-top: 0.25rem;
+        font-weight: bold;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div class="container-options">
+      <div class="card-options">
+        <div class="container-usuario">
+          <img src="" alt="Perfil" id="profileImage" class="profile-img" />
+          <h2 id="userName">Cargando usuario...</h2>
+        </div>
 
-    <img src="" alt="Perfil" id="profileImage" class="profile-img" />
-    <h2 id="userName">Cargando usuario...</h2>
+        <div class="input-container-cantidad">
+          <label for="numQuestions">Número de preguntas (5-50):</label>
+          <input type="range" id="numQuestions" min="5" max="50" value="10" />
+          <div class="range-value" id="rangeValue">10</div>
+        </div>
 
-    <div class="input-container">
-        <label for="numQuestions">Número de preguntas (5-50):</label>
-        <input type="range" id="numQuestions" min="5" max="50" value="10">
-        <div class="range-value" id="rangeValue">10</div>
+        <div class="input-container-areas">
+          <label for="areaSelect">Área:</label>
+          <div id="areaCheckboxList"></div>
+        </div>
+
+        <div class="contenedor-botones">
+          <button onclick="crearCuestionario()" class="boton">
+            Crear cuestionario
+          </button>
+          <button onclick="onLogoutBtnClic()" class="boton boton-logout">
+            Cerrar sesión
+          </button>
+        </div>
+
+        <!-- HISTORIAL DE CUESTIONARIOS -->
+        <h2>Cuestionarios guardados</h2>
+        <div id="quizList"></div>
+
+        <script type="module" src="./auth.js"></script>
+        <script type="module" src="./index.js"></script>
+      </div>
     </div>
-
-    <div class="input-container">
-        <label for="areaSelect">Área:</label>
-        <div id="areaCheckboxList"></div>
-    </div>
-
-    <button onclick="crearCuestionario()">Crear cuestionario</button>
-    <button onclick="onLogoutBtnClic()">Cerrar sesión</button>
-
-    <!-- HISTORIAL DE CUESTIONARIOS -->
-    <h2>Cuestionarios guradados</h2>
-    <div id="quizList"></div>
-
-    <script type="module" src="./auth.js"></script>
-    <script type="module" src="./index.js"></script>
-</body>
-
+  </body>
 </html>

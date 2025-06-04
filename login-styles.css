@@ -2,6 +2,7 @@ body {
   font-family: "Quicksand", "Roboto", Arial, sans-serif;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   background: #f9f9f9;
   color: #222;
 
@@ -28,19 +29,31 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: var(--fondo-2);
 }
 
 .card {
-  max-width: 390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height: 100%; */
+  width: 100%;
+  /* max-width: 390px; */
   padding: 2rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border-top: 2rem solid var(--strong);
+  background-color: var(--fondo);
 }
 
 .card h2 {
   text-align: center;
   padding-bottom: 4rem;
   color: var(--black);
+}
+
+.contenedor-botones {
+  align-self: center;
 }
 
 #user-info {
@@ -66,4 +79,7 @@ body {
 }
 
 @media (max-width: 600px) {
+  .card {
+    height: 100%;
+  }
 }
