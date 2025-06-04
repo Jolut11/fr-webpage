@@ -253,6 +253,24 @@ body {
   margin-top: 10px;
 }
 
+.close-button {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.close-button:hover {
+  background-color: #c0392b;
+}
+
 .correcta {
   background-color: #d1e7dd;
   border: thin solid #a3cfbb;
